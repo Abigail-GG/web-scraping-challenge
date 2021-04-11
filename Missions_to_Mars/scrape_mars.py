@@ -44,6 +44,10 @@ def scrape():
     url ='https://galaxyfacts-mars.com/'
     tables = pd.read_html(url)
     df = tables[0]
+    new_header = df.iloc[0]
+    df = df[1:]
+    df.columns = new_header
+    df.set_index('Mars - Earth Comparison',inplace=True)
 
     html_table = df.to_html()
 
@@ -53,15 +57,15 @@ def scrape():
     url = 'https://marshemispheres.com/'
     browser.visit(url)
     hemisphere_image_urls = []
-    hem_url = browser.find_by_css("a.product-item h3")
+    hem_url = browser.find_element_by_css_selector('a', class_='itemLink product-item')
 
     for item in range(len(hem_url)):
         hemisphere = {}
         browser.find_by_css("a.product-item h3").click()
-        hemisphere["title"] = browser.find_by_css("h2.title").text
+        mars_data["hem_title"] = browser.find_by_css("h2.title").text
 
         sample_element = browser.find_link_by_text("Sample").first
-        hemisphere["img_url"] = sample_element["href"]
+        mars_data["hem_img_url"] = sample_element["href"]
         
         
         # Append Hemisphere Object to List
