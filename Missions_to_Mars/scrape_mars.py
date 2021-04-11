@@ -43,7 +43,8 @@ def scrape():
     ## Mars Facts
     url ='https://galaxyfacts-mars.com/'
     tables = pd.read_html(url)
-    df = tables[1]
+    df = tables[0]
+
     html_table = df.to_html()
 
     mars_data['table'] = html_table

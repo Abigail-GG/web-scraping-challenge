@@ -25,6 +25,20 @@
         <p>{{ mars.news_p }}</p>
       </div>
     </div>
+ 
+    <!-- Feature image and table -->
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-8">
+          <h2>Featured Mars Image</h2>
+            <img src="{{ mars.featured_image_url }}" alt="Feature Mars Image">
+        </div>
+        <div class="col-sm-4">
+          <h2>Mars Facts</h2>
+            {{ mars.table|safe }}
+        </div>
+      </div>
+
 
   </div>
 </body>
